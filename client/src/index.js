@@ -14,6 +14,8 @@ import thunk from 'redux-thunk';
 
 import * as serviceWorker from './serviceWorker';
 
+
+
 // CreateStore is a function from REDUX - It Creates the Initial Store by passing the Root reducer
 // No state is managed, just a store created by passing an all encompassing reducer to the redux createStore fucntion
 const store = createStore(rootReducer,applyMiddleware(thunk));
