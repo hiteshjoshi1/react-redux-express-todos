@@ -46,6 +46,17 @@ docker run   -p 3000:3000 -e uname='hitesh' \
 -d hitesh/nodetodos
 
 
+In heroku Set mongodb Urls --> for now it is pointing to MongoLab
+
+heroku config:set uname=<username>
+heroku config:set password=<password>
+heroku config:set dburl=<dburl>
+
+Deployed Application -> 
+https://pure-scrubland-11307.herokuapp.com/
+
+
+Thanks for free Dynos :)
 
 Application TODOS-
 
