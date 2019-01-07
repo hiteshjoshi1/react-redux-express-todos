@@ -5,8 +5,9 @@ module.exports = {
 
 
     getdbConnectionString: function(){
-        // return `mongodb://${userName}:${pwd}@${dbUrl}`
-        return 'mongodb://localhost:27017/todos'
-    },
+        
+        return `mongodb://${userName}:${pwd}@${dbUrl}`
+        // return 'mongodb://localhost:27017/todos'
+    }, 
     seedDB: process.env.seed||false
 }
