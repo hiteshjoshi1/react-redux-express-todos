@@ -21,7 +21,7 @@ To seed the db with some seed data, change config.idex.js
 Run server -
 npm start
 
-# Install Client dependencies
+## Install Client dependencies
 cd client
 npm i
 
@@ -29,8 +29,9 @@ Run Client
 npm start
 
 
-## Command for Running NodeJs code in Docker container
+#] Command for Running NodeJs code in Docker container
 docker build -t  hiteshjoshi1/nodetodos .
+
 
 # Application needs following set for Mongodb connection in config.js
 uname
