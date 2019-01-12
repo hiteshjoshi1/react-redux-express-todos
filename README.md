@@ -3,7 +3,6 @@ A Hello World Project in React and REDUX.
 Uses Semantic-ui for CSS.
 Use NodeJs/Express for Backend and Mongodb as datastore
 
-
 Start Mongodb
 mongod --dbpath <yourdbpath> --port 27017
 
