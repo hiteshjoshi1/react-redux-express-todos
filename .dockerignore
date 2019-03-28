@@ -2,3 +2,5 @@ node_modules
 npm-debug.log
 logs
 .env
+client/build
+client/node_modules
