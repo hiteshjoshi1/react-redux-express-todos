@@ -86,3 +86,7 @@ Create Kubernetes config map for username and MongoUrl->
 kubectl create configmap username --from-literal=username=<you_mongo_username>
 
 kubectl create configmap dburl --from-literal=dburl=<Your_db_Or_MlabUrl>
+
+## Run with skaffold
+
+skaffold_dev
