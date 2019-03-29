@@ -1,0 +1,9 @@
+apiVersion: skaffold/v1beta5
+kind: Config
+build:
+  artifacts:
+    - image: node-todos-mongo
+deploy:
+  kubectl:
+    manifests:
+      - 'kubernetes/**'

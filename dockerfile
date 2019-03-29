@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # expose port 3000
-EXPOSE 3000
+EXPOSE 4000
 
 # start app with yarn
 CMD ["npm", "start"]

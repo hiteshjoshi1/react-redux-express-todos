@@ -33,7 +33,7 @@ npm start
 
 ## Command for Building the image in Docker
 
-docker build -t hiteshjoshi1/nodetodos .
+docker build -t node-todos-mongo .
 
 ## Application needs following env variables for Mongodb connection in config.js
 
@@ -60,17 +60,29 @@ Create a mongo user locally
 ###Run the code using docker while coonecting to MOngodb at Host
 
 ```
-docker run -p 4000:4000 -e userName='hitesh' \
+docker run -p 4000:4000 -e username='hitesh' \
 -e password='joshi' \
--e dbUrl='host.docker.internal:27017/todos' \
--d hiteshjoshi1/nodetodos
+-e dburl='host.docker.internal:27017/todos' \
+-d node-todos-mongo
 ```
 
 ## Runnig with docker connecting to Mongo at Mlab -
 
 ```
-docker run -p 3000:3000 -e uname='hitesh' \
+docker run -p 4000:4000 -e username='hitesh' \
 -e password='password' \
 -e dburl='yourMLABURL.mlab.com:56540/todos' \
--d hiteshjoshi1/nodetodos
+-d node-todos-mongo
 ```
+
+## Passing env variables and Secrets to kubernetes
+
+You declare configmap and secrets and then reference them in your pod.yaml file
+
+Create Kubernetes secret for password->
+kubectl create secret generic password --from-literal=password=<your-mongo-password-here>
+
+Create Kubernetes config map for username and MongoUrl->
+kubectl create configmap username --from-literal=username=<you_mongo_username>
+
+kubectl create configmap dburl --from-literal=dburl=<Your_db_Or_MlabUrl>

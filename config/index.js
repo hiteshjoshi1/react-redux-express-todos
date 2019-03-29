@@ -1,9 +1,9 @@
-let userName = process.env.userName;
+let username = process.env.username;
 let password = process.env.password;
-let dbUrl = process.env.dbUrl;
+let dburl = process.env.dburl;
 module.exports = {
   getdbConnectionString: function() {
-    return `mongodb://${userName}:${password}@${dbUrl}`;
+    return `mongodb://${username}:${password}@${dburl}`;
     // return 'mongodb://localhost:27017/todos'
   },
   seedDB: process.env.seed || false
