@@ -4,3 +4,4 @@ logs
 client/node_modules
 client/build
 .DS_Store
+project_settings.txt

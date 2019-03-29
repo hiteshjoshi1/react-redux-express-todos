@@ -45,10 +45,12 @@ docker build -t node-todos-mongo .
 
 Create a mongo user locally
 
-> mongo
-> use todos
-> db.createUser(
-> {
+$ mongo
+$ use todos
+
+```
+db.createUser(
+ {
 
      user: "hitesh",
      pwd: "joshi",
@@ -56,6 +58,7 @@ Create a mongo user locally
 
 }
 )
+```
 
 ###Run the code using docker while coonecting to MOngodb at Host
 
@@ -79,14 +82,22 @@ docker run -p 4000:4000 -e username='hitesh' \
 
 You declare configmap and secrets and then reference them in your pod.yaml file
 
-Create Kubernetes secret for password->
+Create Kubernetes secret for password
+
+```
 kubectl create secret generic password --from-literal=password=<your-mongo-password-here>
+```
 
 Create Kubernetes config map for username and MongoUrl->
+
+```
 kubectl create configmap username --from-literal=username=<you_mongo_username>
 
 kubectl create configmap dburl --from-literal=dburl=<Your_db_Or_MlabUrl>
+```
 
 ## Run with skaffold
 
+```
 skaffold_dev
+```
