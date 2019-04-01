@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: todos
+  name: todos
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: todos
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: todos
+    spec:
+      containers:
+        - image: todos
+          name: todos
+          ports:
+            - containerPort: 4000
+              name: http
+              protocol: TCP
+          env:
+            - name: username
+              valueFrom:
+                configMapKeyRef:
+                  name: username
+                  key: username
+            - name: dburl
+              valueFrom:
+                configMapKeyRef:
+                  name: dburl
+                  key: dburl
+            - name: password
+              valueFrom:
+                secretKeyRef:
+                  name: password
+                  key: password
