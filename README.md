@@ -1,7 +1,15 @@
-REACT TODOS -  
-A Hello World Project in React and REDUX.
-Uses Semantic-ui for CSS.
-Use NodeJs/Express for Backend and Mongodb as datastore
+#Kubectl
+#PODS
+#Horizontal scaling
+#Replication and Load Balancing
+
+# REACT TODOS -
+
+A Hello World Project in React, Redux, NodeJS, Mongodb.
+
+I use MongoLab. You can use a local Mongo instance as well.
+
+The application can be deployed standalone or in a minikube cluster with replication.
 
 Start Mongodb
 mongod --dbpath <yourdbpath> --port 27017
@@ -33,7 +41,7 @@ npm start
 
 ## Command for Building the image in Docker
 
-docker build -t node-todos-mongo .
+docker build -t todos .
 
 ## Application needs following env variables for Mongodb connection in config.js
 
@@ -66,7 +74,7 @@ db.createUser(
 docker run -p 4000:4000 -e username='hitesh' \
 -e password='joshi' \
 -e dburl='host.docker.internal:27017/todos' \
--d node-todos-mongo
+-d todos
 ```
 
 ## Runnig with docker connecting to Mongo at Mlab -
@@ -75,7 +83,7 @@ docker run -p 4000:4000 -e username='hitesh' \
 docker run -p 4000:4000 -e username='hitesh' \
 -e password='password' \
 -e dburl='yourMLABURL.mlab.com:56540/todos' \
--d node-todos-mongo
+-d todos
 ```
 
 ## Passing env variables and Secrets to kubernetes
@@ -96,8 +104,15 @@ kubectl create configmap username --from-literal=username=<you_mongo_username>
 kubectl create configmap dburl --from-literal=dburl=<Your_db_Or_MlabUrl>
 ```
 
-## Run with skaffold
+## Run with skaffold - Local Development
 
 ```
 skaffold_dev
 ```
+
+#TODO
+
+- Deploy to GCE
+- Deploy to Azure
+- Deploy to AWS
+  Create seprate branches if cloud specific config is required
