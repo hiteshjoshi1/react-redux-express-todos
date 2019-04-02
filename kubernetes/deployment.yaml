@@ -19,6 +19,7 @@ spec:
       containers:
         - image: todos
           name: todos
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 4000
               name: http

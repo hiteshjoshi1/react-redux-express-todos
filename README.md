@@ -110,9 +110,32 @@ kubectl create configmap dburl --from-literal=dburl=<Your_db_Or_MlabUrl>
 skaffold_dev
 ```
 
+If you are not using Skaffold(God knows why)
+
+- set the environment variables with eval \$(minikube docker-env)
+- build the image with the Docker daemon of Minukube eg
+  ```
+  docker build -t todos .
+  ```
+- Finally use K8 apply (I prefer it over k8 create and run) -
+  ```
+  kubectl apply -f ./kubernetes/
+  ```
+- You can directly run it using K8 run as -
+
+```
+kubectl run todos --image=todos:latest --image-pull-policy=Never
+```
+
+## If everything goes fine , the deployed Load Balanced application would be available in -
+
+http://192.168.64.4/
+
+This is a load balancer URL which is redirecting to your pods which are running at 4000
+
 # TODO
 
- - [ ] Deploy to Azure
+- [ ] Deploy to Azure
 - [ ] Deploy to GCE
 - [ ] Deploy to AWS
-Create seprate branches if cloud specific config is required
+      Create seprate branches if cloud specific config is required
