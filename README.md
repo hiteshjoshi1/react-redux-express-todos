@@ -21,17 +21,17 @@ cd <folderName>
 Install server dependencies
 npm i
 
-# Server expects a Mongodb server running at localhost:27017
+## Server expects a Mongodb server running at localhost:27017
 
 To seed the db with some seed data, change config.idex.js
 seedDB: process.env.seed||true
 
-# With seedDb set to true, code will seed the db with dummy Todos.
+### With seedDb set to true, code will seed the db with dummy Todos.
 
 Run server -
 npm start
 
-# Install Client dependencies
+## Install Client dependencies
 
 cd client
 npm i
@@ -68,7 +68,7 @@ db.createUser(
 )
 ```
 
-###Run the code using docker while coonecting to MOngodb at Host
+### Run the code using docker while coonecting to MOngodb at Host
 
 ```
 docker run -p 4000:4000 -e username='hitesh' \
@@ -110,9 +110,9 @@ kubectl create configmap dburl --from-literal=dburl=<Your_db_Or_MlabUrl>
 skaffold_dev
 ```
 
-#TODO
+# TODO
 
-- Deploy to GCE
-- Deploy to Azure
-- Deploy to AWS
-  Create seprate branches if cloud specific config is required
+ - [ ] Deploy to Azure
+- [ ] Deploy to GCE
+- [ ] Deploy to AWS
+Create seprate branches if cloud specific config is required
