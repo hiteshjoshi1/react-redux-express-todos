@@ -129,6 +129,12 @@ skaffold_dev
 kubectl run todos --image=todos:latest --image-pull-policy=Never
 ```
 
+Open the Service to an external IP in Minikube
+
+```
+minikube service todos
+```
+
 ### If everything goes fine , the deployed Load Balanced application would be available in -
 
 http://192.168.64.4/
