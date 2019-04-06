@@ -220,6 +220,12 @@ helm rollback <RELEASE_NAME> <REVISION_NUMBER>
 helm delete --purge RELEASE_NAME
 ```
 
+- To do a test deploy to preview the result of a helm run, where charts is our directory with helm config
+
+```
+helm install ./charts/ --dry-run --debug
+```
+
 # TODO
 
 - [x] Helm Charts
