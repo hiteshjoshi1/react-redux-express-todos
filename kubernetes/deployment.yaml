@@ -17,7 +17,7 @@ spec:
         app: todos
     spec:
       containers:
-        - image: todos
+        - image: hiteshacr.azurecr.io/todos:v1
           name: todos
           imagePullPolicy: IfNotPresent
           ports:
