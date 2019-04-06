@@ -6,4 +6,4 @@ build:
 deploy:
   kubectl:
     manifests:
-      - "kubernetes/**"
+      - "charts/templates/**"

@@ -11,6 +11,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 4000
-  externalIPs:
-    - 192.168.64.4
   type: LoadBalancer

@@ -1,15 +1,17 @@
+#Helm charts
 #Kubectl
 #PODS
+#Docker
 #Horizontal scaling
 #Replication and Load Balancing
 
 # REACT TODOS -
 
+Purpose of this application is to explore Kubernetes and the surrouding devops systems.
+
 A Hello World Project in React, Redux, NodeJS, Mongodb.
 
 I use MongoLab. You can use a local Mongo instance as well.
-
-The application can be deployed standalone or in a minikube cluster with replication.
 
 Start Mongodb
 mongod --dbpath <yourdbpath> --port 27017
@@ -110,7 +112,7 @@ kubectl create configmap dburl --from-literal=dburl=<Your_db_Or_MlabUrl>
 skaffold_dev
 ```
 
-If you are not using Skaffold(God knows why)
+### If you are not using Skaffold for local development(God knows why- you should)
 
 - set the environment variables with eval \$(minikube docker-env)
 - build the image with the Docker daemon of Minukube eg
@@ -127,15 +129,100 @@ If you are not using Skaffold(God knows why)
 kubectl run todos --image=todos:latest --image-pull-policy=Never
 ```
 
-## If everything goes fine , the deployed Load Balanced application would be available in -
+Open the Service to an external IP in Minikube
+
+```
+minikube service todos
+```
+
+### If everything goes fine , the deployed Load Balanced application would be available in -
 
 http://192.168.64.4/
 
 This is a load balancer URL which is redirecting to your pods which are running at 4000
 
+## Production Readiness
+
+Well to move to cloud cluster which would be the eventual home of such an application, we need to make some adjustments
+
+In comes - Helm (Helm - client and Tiller - Server), the package manager for Kubernetes
+
+## Deploying Using Helm in Local Minikube cluster -
+
+- Install Helm
+
+```
+brew install kubernetes-helm
+```
+
+Again if you are not in mac/ Linux. Go figure....
+
+- Initialise Tiller -
+
+helm init --history-max 200
+
+This will initialize Tiller and will make sure that it keeps only the last 200 builds as history.
+
+- Now Start the deployment and services with helm using the command, from project root.
+
+```
+helm init .
+```
+
+- This will start the pods - 3 in our case and create the load balancing service, check them out by
+
+```
+kubectl get po,svc
+```
+
+Now if you used Helm to deploy to a Cloud Cluster , a public IP will be created on service creation and your website would be available on it.
+
+However on minikube cluster, public ip is not provisioned automatically.
+Open your application after your deployment has completed with the command -
+
+```
+minikube service todos
+```
+
+- See Deployed helm releases with
+
+```
+helm ls
+```
+
+- Check a particular Release -
+
+```
+helm status <RELEASE_NAME>
+```
+
+- Delete all Kubernetes resources related to a release
+
+```
+helm delete <RELEASE_NAME>
+```
+
+To see the deleted release
+
+```
+helm ls --deleted
+```
+
+### To RollBack to a particular Relase
+
+```
+helm rollback <RELEASE_NAME> <REVISION_NUMBER>
+```
+
+- To Permanently delete a release from Helm
+
+```
+helm delete --purge RELEASE_NAME
+```
+
 # TODO
 
+- [x] Helm Charts
 - [ ] Deploy to Azure
 - [ ] Deploy to GCE
 - [ ] Deploy to AWS
-      Create seprate branches if cloud specific config is required
