@@ -2,18 +2,19 @@ pool:
   vmImage: "Ubuntu 16.04"
 
 trigger:
-  batch: true
-  branches:
-    include:
-      - refs/heads/*
+  - azure
+
 variables:
   projectName: todos
-  registryServerName: "$(registryName).azurecr.io"
   imageName: "$(projectName)"
+  registryServerName: "$(registryName).azurecr.io"
   # define 3 more variables: registryName, registryLogin and registryPassword in the build pipeline in UI
 
 steps:
-  - bash: docker build -f $(system.defaultWorkingDirectory)/$(projectName)/dockerfile -t $(registryServerName)/$(imageName):$(build.buildId) -t $(registryServerName)/$(imageName):latest $(system.defaultWorkingDirectory)/$(projectName)
+  - bash: pwd && ls
+    displayName: "Folder check"
+
+  - bash: docker build -f $(system.defaultWorkingDirectory)/dockerfile -t $(registryServerName)/$(imageName):$(build.buildId) -t $(registryServerName)/$(imageName):latest $(system.defaultWorkingDirectory)/
     displayName: "docker build"
 
   - bash: docker login $(registryServerName) -u $(registryLogin) -p $(registryPassword)
@@ -31,9 +32,9 @@ steps:
     inputs:
       helmVersion: 2.13.0
 
-  - bash: helm package --version $(build.buildId) --destination $(build.artifactStagingDirectory) $(system.defaultWorkingDirectory)/$(projectName)/charts/$(projectName)
+  - bash: helm package --version $(build.buildId) --destination $(build.artifactStagingDirectory) $(system.defaultWorkingDirectory)/charts/
     displayName: "helm package"
 
-  - bash: az acr helm push -n $(registryName) -u $(registryLogin) -p $(registryPassword) $(build.artifactStagingDirectory)/$(projectName)-$(build.buildId).tgz
+  - bash: az acr helm push -n $(registryName) -u $(registryLogin) -p $(registryPassword) $(build.artifactStagingDirectory)-$(build.buildId).tgz
     displayName: "az acr helm push"
     condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
