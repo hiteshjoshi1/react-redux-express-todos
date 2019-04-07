@@ -11,9 +11,6 @@ variables:
   # define 3 more variables: registryName, registryLogin and registryPassword in the build pipeline in UI
 
 steps:
-  - bash: pwd && ls
-    displayName: "Folder check"
-
   - bash: docker build -f $(system.defaultWorkingDirectory)/dockerfile -t $(registryServerName)/$(imageName):$(build.buildId) -t $(registryServerName)/$(imageName):latest $(system.defaultWorkingDirectory)/
     displayName: "docker build"
 
@@ -35,6 +32,9 @@ steps:
   - bash: helm package --version $(build.buildId) --destination $(build.artifactStagingDirectory) $(system.defaultWorkingDirectory)/charts/$(projectName)
     displayName: "helm package"
 
-  - bash: az acr helm push -n $(registryName) -u $(registryLogin) -p $(registryPassword) $(build.artifactStagingDirectory)-$(build.buildId).tgz
+  - bash: pwd && ls
+    displayName: "Folder check for helm"
+
+  - bash: az acr helm push -n $(registryName) -u $(registryLogin) -p $(registryPassword) $(build.artifactStagingDirectory)/$(projectName)-$(build.buildId).tgz
     displayName: "az acr helm push"
     condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/azure'))
