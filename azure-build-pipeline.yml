@@ -1,11 +1,11 @@
 pool:
   vmImage: "Ubuntu 16.04"
 
-trigger:
-  batch: true
-  branches:
-    include:
-      - refs/heads/*
+# trigger:
+#   batch: true
+#   branches:
+#     include:
+#       - refs/heads/*
 
 variables:
   projectName: react-redux-express-todos
