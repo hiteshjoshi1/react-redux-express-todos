@@ -1,24 +1,22 @@
 pool:
   vmImage: "Ubuntu 16.04"
 
-# trigger:
-#   batch: true
-#   branches:
-#     include:
-#       - refs/heads/*
+trigger:
+  batch: true
+  branches:
+    include:
+      - refs/heads/*
+  paths:
+    include:
+      - react-redux-express-todos/
 
 variables:
-  projectName: react-redux-express-todos
+  projectName: todos
   registryServerName: "$(registryName).azurecr.io"
   imageName: "$(projectName)"
   # define 3 more variables: registryName, registryLogin and registryPassword in the build pipeline in UI
 
 steps:
-  - bash: pwd
-    displayName: "Show paths"
-  - bash: ls
-    displayName: "Inside project"
-    
   - bash: docker build -f $(system.defaultWorkingDirectory)/$(projectName)/dockerfile -t $(registryServerName)/$(imageName):$(build.buildId) -t $(registryServerName)/$(imageName):latest $(system.defaultWorkingDirectory)/$(projectName)
     displayName: "docker build"
 
