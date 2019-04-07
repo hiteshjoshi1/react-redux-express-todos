@@ -6,9 +6,6 @@ trigger:
   branches:
     include:
       - refs/heads/*
-  paths:
-    include:
-      - react-redux-express-todos/
 
 variables:
   projectName: react-redux-express-todos
