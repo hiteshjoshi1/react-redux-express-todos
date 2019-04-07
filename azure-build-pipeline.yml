@@ -8,10 +8,10 @@ trigger:
       - refs/heads/*
   paths:
     include:
-      - todos/
+      - react-redux-express-todos/
 
 variables:
-  projectName: todos
+  projectName: react-redux-express-todos
   registryServerName: "$(registryName).azurecr.io"
   imageName: "$(projectName)"
   # define 3 more variables: registryName, registryLogin and registryPassword in the build pipeline in UI
