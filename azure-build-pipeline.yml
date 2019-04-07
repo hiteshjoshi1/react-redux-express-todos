@@ -6,10 +6,6 @@ trigger:
   branches:
     include:
       - refs/heads/*
-  paths:
-    include:
-      - react-redux-express-todos/
-
 variables:
   projectName: todos
   registryServerName: "$(registryName).azurecr.io"
