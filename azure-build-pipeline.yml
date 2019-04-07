@@ -16,7 +16,7 @@ variables:
 steps:
   - bash: pwd
     displayName: "Show paths"
-  - bash: cd .. && ls
+  - bash: ls
     displayName: "Inside project"
     
   - bash: docker build -f $(system.defaultWorkingDirectory)/$(projectName)/dockerfile -t $(registryServerName)/$(imageName):$(build.buildId) -t $(registryServerName)/$(imageName):latest $(system.defaultWorkingDirectory)/$(projectName)
