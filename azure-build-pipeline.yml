@@ -19,13 +19,13 @@ steps:
 
   - bash: docker login $(registryServerName) -u $(registryLogin) -p $(registryPassword)
     displayName: "docker login"
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/azure'))
 
   - bash: |
       docker push $(registryServerName)/$(imageName):$(build.buildId)
       docker push $(registryServerName)/$(imageName):latest
     displayName: "docker push"
-    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['build.sourceBranch'], 'refs/heads/azure'))
 
   - task: HelmInstaller@0
     displayName: "Install Helm"
