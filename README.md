@@ -120,16 +120,18 @@ skaffold_dev
   docker build -t todos .
   ```
 - Finally use K8 apply (I prefer it over k8 create and run) -
+
   ```
-  kubectl apply -f ./kubernetes/
+  kubectl apply -f ./charts/todos/templates/
   ```
-- You can directly run it using K8 run as -
+
+- You can directly run it using K8 run as[Not preferred] -
 
 ```
 kubectl run todos --image=todos:latest --image-pull-policy=Never
 ```
 
-Open the Service to an external IP in Minikube
+Open the Service to an external IP in Minikube, this is done automatically in a Paas like Azure ->
 
 ```
 minikube service todos
@@ -166,13 +168,19 @@ This will initialize Tiller and will make sure that it keeps only the last 200 b
 - Now Start the deployment and services with helm using the command, from project root.
 
 ```
-helm init .
+helm install ./charts/todos/
 ```
 
 - This will start the pods - 3 in our case and create the load balancing service, check them out by
 
 ```
 kubectl get po,svc
+```
+
+or
+
+```
+kubectl get all
 ```
 
 Now if you used Helm to deploy to a Cloud Cluster , a public IP will be created on service creation and your website would be available on it.
@@ -196,16 +204,16 @@ helm ls
 helm status <RELEASE_NAME>
 ```
 
-- Delete all Kubernetes resources related to a release
+To see the deleted release ->
 
 ```
-helm delete <RELEASE_NAME>
+helm delete  <chart-name>
 ```
 
-To see the deleted release
+Soft Delete ->
 
 ```
-helm ls --deleted
+helm delete --purge <chart-name>
 ```
 
 ### To RollBack to a particular Relase
@@ -223,6 +231,9 @@ helm delete --purge RELEASE_NAME
 # TODO
 
 - [x] Helm Charts
-- [ ] Deploy to Azure
+- [x] Deploy to Azure - See the Azure branch. Used Azure devops. Create a Build and Release pipeline
+      Based on - Thanks (MATHIEU BENOIT)[https://github.com/mathieu-benoit]
+      https://cloudblogs.microsoft.com/opensource/2018/11/27/tutorial-azure-devops-setup-cicd-pipeline-kubernetes-docker-helm/
 - [ ] Deploy to GCE
 - [ ] Deploy to AWS
+- [ ] Create Helm charts with command line values passed at run time
