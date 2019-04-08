@@ -5,3 +5,5 @@ client/node_modules
 client/build
 .DS_Store
 project_settings.txt
+Azure_kubernetes.txt
+Azure_K8_steps.txt
