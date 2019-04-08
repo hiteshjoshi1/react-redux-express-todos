@@ -16,6 +16,8 @@ spec:
       labels:
         app: todos
     spec:
+      imagePullSecrets:
+        - name: acr-auth
       containers:
         - image: hiteshacr.azurecr.io/todos
           # - image: todos
