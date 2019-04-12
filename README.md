@@ -5,7 +5,9 @@
 #Horizontal scaling
 #Replication and Load Balancing
 
-# REACT TODOS -
+# Kubernetes Playground
+
+An app written in Node Js and Mongodb, which is deployed using Docker, Kubernetes and Helm.
 
 Purpose of this application is to explore Kubernetes and the surrouding devops systems.
 
